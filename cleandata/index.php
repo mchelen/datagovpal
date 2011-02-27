@@ -11,13 +11,24 @@
 # https://gist.github.com/728507
 
 
-$filename = 'data_gov_catalog.csv';
-$lines = file('data_gov_catalog.csv');
+// source csv file
+$filepath = '../data_gov_catalog.csv';
+
+// open file
+$handle = fopen($filepath, "r");
+
+// read file 
+$lines = file($filepath);
 
 $headers = explode(',',$lines[0]);
+
 print "<pre>";
 print_r($headers);
 print "</pre>";
+
+exit;
+
+/*
 $cleaned_data = array();
 
 // Array
@@ -81,7 +92,7 @@ $cleaned_data = array();
 
 
 $row = 20;
-if (($handle = fopen($filename, "r")) !== FALSE) {
+if (($handle = fopen($filepath, "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         $num = count($data);
         // echo "<p> $num fields in line $row: <br /></p>\n";
@@ -149,7 +160,7 @@ exit;
 
 
 $row = 20;
-if (($handle = fopen($filename, "r")) !== FALSE) {
+if (($handle = fopen($filepath, "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         $num = count($data);
         echo "<p> $num fields in line $row: <br /></p>\n";
@@ -164,5 +175,6 @@ if (($handle = fopen($filename, "r")) !== FALSE) {
 }
 
 // print_r($file);
+
 
 ?>
