@@ -20,15 +20,15 @@ $handle = fopen($filepath, "r");
 // read file 
 $lines = file($filepath);
 
+// read first line containing headers
 $headers = explode(',',$lines[0]);
 
 print "<pre>";
 print_r($headers);
 print "</pre>";
 
-exit;
 
-/*
+// initialize output array
 $cleaned_data = array();
 
 // Array
@@ -92,11 +92,16 @@ $cleaned_data = array();
 
 
 $row = 20;
+
+// try to open file
 if (($handle = fopen($filepath, "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+// loop through lines of the file
+    while (($data = fgetcsv($handle, ",")) !== FALSE) {
+    // count the number of fields in the line
         $num = count($data);
         // echo "<p> $num fields in line $row: <br /></p>\n";
 
+   // populate output array
 		$cleaned_data[] = array(
 			'Agency' => $data[2],
 			'SubAgency'=> $data[3],
@@ -122,7 +127,6 @@ if (($handle = fopen($filepath, "r")) !== FALSE) {
 }
 
 
-
 /*
 foreach($lines as $x) {
 
@@ -140,6 +144,9 @@ foreach($cleaned_data as $data) {
 	print "<tr><td>" . implode($data, '</td><td>') . "</td></tr>";
 }
 print "</table>";
+
+exit;
+
 
 // [39] => Feeds File Size
 // [40] => XML Access Point
